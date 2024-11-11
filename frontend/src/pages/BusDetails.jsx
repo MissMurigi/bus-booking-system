@@ -1,9 +1,10 @@
 import React from 'react'
+import BusCard from '../components/BusCard'
 
 function BusDetails() {
   return (
     <div>
-      <p>Bus Details Page</p>
+      <BusCard />.
     </div>
   )
 }
