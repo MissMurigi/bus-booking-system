@@ -12,9 +12,9 @@ const Footer = () =>{
                     &copy; {new Date().getFullYear()} All rights reserved | This website is made with React
                 </p>
                 <div className="footerlinks">
-                    <Link to="/privacy-policy">Private Policy</Link>
-                    <Link to="/term-of-service"> Term of Service</Link>
-                    <Link to='/contact-us'>Contact Us</Link>
+                    <Link to="/privacypolicy">Private Policy</Link>
+                    <Link to="/termofservice"> Term of Service</Link>
+                    <Link to='/contactus'>Contact Us</Link>
 
                 </div>
             </div>
