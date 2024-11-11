@@ -6,7 +6,8 @@ import BusDetails from './pages/BusDetails';
 import NotFound from './pages/NotFound';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import ContactUs from './pages/ContactUs';
-import TermOfService from './pages/TermsOfService'
+import TermOfService from './pages/TermsOfService';
+import SIgnup from './pages/Signup'
 
 
 
@@ -22,6 +23,11 @@ const routes = [
           { path: "/booking", element: <Booking /> },
           { path: "/dashboard", element: <Dashboard /> },
           { path: "/busdetails", element: <BusDetails /> },
+          { path: "/privacypolicy", element: <PrivacyPolicy /> },
+          { path: "/contactus", element: <ContactUs /> },
+          { path: "/termsofservice", element: <TermOfService /> },
+          { path: "/signup", element: <SIgnup /> },
+
 
         ]
 

@@ -1,14 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import './Login.css'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Signup.css';
 
-function Login() {
+function Sighup() {
   return (
-    <div className='login'>
-      <div className="login-container">
-        <h1> Login</h1>
-        <form>
-          <div className="div">
+    <div className='signup'>
+      <h1>Sign Up</h1>
+      <form>
+        <h1>Create an New Account </h1>
+        <div className="div">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" placeholder='username'required />
             
@@ -24,28 +24,21 @@ function Login() {
             <input type="password" id="password" name="password" placeholder='password' required/>
 
           </div>
-          <button type='submit' className='login-button'>
-            Login
+          <button type='submit' className='signup-button'>
+            Sigh Up
+            
           </button>
+          <div>
+            <p>Already have an account? </p>
+            <Link to='/login'>Login</Link>
 
-          <div className='signup-link'>
-            <p>Don't have an account?</p>
-            <Link to='/signup'>Sign up here</Link>
           </div>
 
+      </form>
+      <>Sign-up page</>
 
-
-          
-
-        </form>
-
-
-
-
-
-      </div>
     </div>
   )
 }
 
-export default Login
+export default Sighup;
