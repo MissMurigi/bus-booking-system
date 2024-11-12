@@ -1,0 +1,92 @@
+/* Container for the Privacy Policy */
+.privacy-policy-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+/* Title */
+.privacy-policy-container h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #0044cc;
+  margin-bottom: 20px;
+}
+
+/* Subtitle for section headings */
+.privacy-policy-container h2 {
+  font-size: 1.8rem;
+  color: #222;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #0044cc;
+  padding-bottom: 5px;
+}
+
+/* Paragraph text */
+.privacy-policy-container p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Strong text (for dates, headers, etc.) */
+.privacy-policy-container strong {
+  font-weight: bold;
+  color: #000;
+}
+
+/* List for the information sections */
+.privacy-policy-container ul {
+  margin-left: 20px;
+  list-style-type: disc;
+}
+
+.privacy-policy-container li {
+  margin-bottom: 10px;
+}
+
+/* Back to Home link */
+.back-to-home {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.home-link {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #0044cc;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.home-link:hover {
+  background-color: #002f8f;
+}
+
+/* Media Queries for responsiveness */
+/* @media (max-width: 768px) {
+  .privacy-policy-container {
+    padding: 15px;
+  }
+
+  .privacy-policy-container h1 {
+    font-size: 2rem;
+  }
+
+  .privacy-policy-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .privacy-policy-container p {
+    font-size: 0.95rem;
+  }
+} */
