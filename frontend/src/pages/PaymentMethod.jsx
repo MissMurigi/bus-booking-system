@@ -46,7 +46,7 @@ const PaymentMethod = () => {
       draggable: true,
       progress: undefined,
       theme: "dark",
-      onClose: () => navigate('/bikes'),
+      onClose: () => navigate('/'),
     });
   };
 
