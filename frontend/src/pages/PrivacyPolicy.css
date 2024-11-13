@@ -73,7 +73,7 @@
 }
 
 /* Media Queries for responsiveness */
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
   .privacy-policy-container {
     padding: 15px;
   }
@@ -89,4 +89,4 @@
   .privacy-policy-container p {
     font-size: 0.95rem;
   }
-} */
+}
