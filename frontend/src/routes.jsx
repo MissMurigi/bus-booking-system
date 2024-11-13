@@ -8,7 +8,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import ContactUs from './pages/ContactUs';
 import TermOfService from './pages/TermsOfService';
 import SIgnup from './pages/Signup'
-import PaymentMethod from './pages/PaymentMethod'; 
+//import PaymentMethod from './pages/PaymentMethod'; 
 
 
 const routes = [
