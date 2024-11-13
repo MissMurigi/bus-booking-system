@@ -1,0 +1,32 @@
+
+
+.booking-container {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .seats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .seat {
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .available {
+    background-color: #4caf50; 
+    color: white;
+  }
+  
+  .reserved {
+    background-color: #f44336; 
+    color: white;
+  }
+  
