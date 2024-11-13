@@ -25,7 +25,7 @@ function Sighup() {
 
           </div>
           <button type='submit' className='signup-button'>
-            Sigh Up
+            Sign Up
             
           </button>
           <div>
