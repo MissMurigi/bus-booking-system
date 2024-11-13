@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Booking.css'; 
+import { useNavigate } from 'react-router-dom'; 
+import './Booking.css';
 
 const Booking = () => {
-  // Initializing seat availability (false means available, true means reserved)
   const [seats, setSeats] = useState(Array(15).fill(false));
+  const navigate = useNavigate(); 
 
-  // Toggle seat availability
   const toggleSeat = (index) => {
     const updatedSeats = [...seats];
     updatedSeats[index] = !updatedSeats[index];
     setSeats(updatedSeats);
+  };
+
+  const handleConfirm = () => {
+    navigate('/payment-method'); 
   };
 
   return (
@@ -27,6 +30,9 @@ const Booking = () => {
           </div>
         ))}
       </div>
+      <button className="confirm-button" onClick={handleConfirm}>
+        Confirm
+      </button>
     </div>
   );
 };
