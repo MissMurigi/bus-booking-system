@@ -1,0 +1,20 @@
+/* Global styles */
+html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  html.dark {
+    background-color: #2a2a2a;  /* Dark background */
+    color: #f0f0f0;  /* Light text color for dark mode */
+  }
+  
+  /* Example of other dark mode custom styles */
+  body {
+    background-color: #ffffff;  /* Default light mode background */
+    transition: background-color 0.3s ease;
+  }
+  
+  html.dark body {
+    background-color: #181818;  /* Dark mode body background */
+  }
+  

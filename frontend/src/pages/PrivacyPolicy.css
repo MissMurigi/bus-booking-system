@@ -1,4 +1,4 @@
-/* Container for the Privacy Policy */
+
 .privacy-policy-container {
   max-width: 800px;
   margin: 0 auto;
@@ -10,7 +10,6 @@
   border-radius: 8px;
 }
 
-/* Title */
 .privacy-policy-container h1 {
   text-align: center;
   font-size: 2.5rem;
@@ -18,7 +17,7 @@
   margin-bottom: 20px;
 }
 
-/* Subtitle for section headings */
+
 .privacy-policy-container h2 {
   font-size: 1.8rem;
   color: #222;
@@ -28,20 +27,19 @@
   padding-bottom: 5px;
 }
 
-/* Paragraph text */
+
 .privacy-policy-container p {
   font-size: 1rem;
   color: #555;
   margin-bottom: 15px;
 }
 
-/* Strong text (for dates, headers, etc.) */
 .privacy-policy-container strong {
   font-weight: bold;
   color: #000;
 }
 
-/* List for the information sections */
+
 .privacy-policy-container ul {
   margin-left: 20px;
   list-style-type: disc;
@@ -51,7 +49,6 @@
   margin-bottom: 10px;
 }
 
-/* Back to Home link */
 .back-to-home {
   margin-top: 40px;
   text-align: center;
@@ -72,8 +69,8 @@
   background-color: #002f8f;
 }
 
-/* Media Queries for responsiveness */
-/* @media (max-width: 768px) {
+
+@media (max-width: 768px) {
   .privacy-policy-container {
     padding: 15px;
   }
@@ -89,4 +86,4 @@
   .privacy-policy-container p {
     font-size: 0.95rem;
   }
-} */
+}
