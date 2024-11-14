@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from routes import *
 
 # Initialize the Flask application
 app = Flask(__name__)
