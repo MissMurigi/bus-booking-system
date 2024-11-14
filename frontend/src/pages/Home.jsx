@@ -4,7 +4,7 @@ import './Home.css';
 
 import Footer from '../components/Footer';
 import Header from '../components/Navbar';
-import Theme from '../components/theme/Theme'; // Corrected path
+import Theme from '../components/theme/Theme'; 
 import bus1 from '../assets/bus1.png';
 import bus2 from '../assets/bus2.png';
 import bus3 from '../assets/bus3.png';
@@ -39,7 +39,7 @@ function Home() {
 
   return (
     <div className="home">
-      <Theme /> {/* Theme toggle button */}
+      <Theme /> 
       <Header />
       <div className="home-header">
         <div className="text-content">

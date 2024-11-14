@@ -5,7 +5,7 @@ import { LiaTimesSolid } from 'react-icons/lia';
 import { FaBars, FaPhone } from 'react-icons/fa6';
 import { HiHome } from "react-icons/hi";
 import { HiOutlineUserCircle } from "react-icons/hi";
-import Theme from "./theme/Theme"; // Import Theme component
+import Theme from "./theme/Theme"; 
 import './Navbar.css';
 import '../index.css';
 
@@ -16,6 +16,7 @@ const Navbar = () => {
     { href: "/", label: "Home", icon: <HiHome /> },
     { href: "/dashboard", label: "Dashboard" },
     { href: "/booking", label: "Booking" },
+    { href: "/busdetails", label: "Bus Details" },
   ];
 
   const handleClick = () => {
@@ -28,12 +29,12 @@ const Navbar = () => {
 
   return (
     <div className="w-full h-[8ch] bg-neutral-100 dark:bg-neutral-900 flex items-center md:flex-row lg:px-28 md:px-16 sm:px-7 px-4 fixed top-0 z-50">
-      {/* Logo */}
+      
       <Link to="/" className="mr-16">
         <img src={Logo} alt="logo" className="w-28 h-auto object-contain" />
       </Link>
 
-      {/* Mobile Menu Toggle */}
+      
       <button
         onClick={handleClick}
         className="lg:hidden text-neutral-600 dark:text-neutral-300 ease-in-out duration-300 flex items-center justify-end"
@@ -41,7 +42,7 @@ const Navbar = () => {
         {open ? <LiaTimesSolid className="text-xl" /> : <FaBars className="text-xl" />}
       </button>
 
-      {/* Navigation Links */}
+      
       <div
         className={`${open ? 'flex absolute top-14 left-0 w-full h-auto md:h-auto md:relative' : 'hidden'} flex-1 md:flex flex-col md:flex-row gap-x-5 gap-y-2 md:items-center md:p-0 sm:p-4 p-4 justify-between md:bg-transparent bg-neutral-100 md:shadow-none shadow-md rounded-md`}
       >
@@ -58,7 +59,7 @@ const Navbar = () => {
               </Link>
             </li>
           ))}
-          {/* Login Icon, placed last */}
+          
           <li>
             <Link
               to="/login"
@@ -71,7 +72,7 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Help Section */}
+        
         <div className="relative bg-violet-600 rounded-md px-8 py-2 w-fit cursor-pointer flex items-center gap-x-4">
           <FaPhone className="text-neutral-50 text-sm" />
           <div>
@@ -80,7 +81,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Theme Toggle Button */}
+        
         <Theme />
       </div>
     </div>
