@@ -1,10 +1,10 @@
 import React from 'react'
-import Header from '../components/Header'
+import Navbar from '../components/Navbar'
 
 function Booking() {
   return (
     <div>
-      <Header />
+      <Navbar />
       <>Booking Page</>
     </div>
   )

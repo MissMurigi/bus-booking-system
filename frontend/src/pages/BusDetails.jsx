@@ -1,11 +1,11 @@
 import React from 'react'
 import BusCard from '../components/BusCard'
-import Header from '../components/Header'
+import Navbar from '../components/Navbar'
 
 function BusDetails() {
   return (
     <div>
-      <Header />
+      <Navbar/>
       <BusCard />.
     </div>
   )
