@@ -17,6 +17,16 @@ class User(db.Model):
     bookings = db.relationship('Booking', back_populates='customer')
     buses = db.relationship('Bus', back_populates='driver')
 
+    def to_dict(self):
+        return {
+            'user_id': self.user_id,
+            'username': self.username,
+            'email': self.email,
+            'role': self.role,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
+
     def __repr__(self):
         return f'<User(username={self.username}, email={self.email}, role={self.role})>'
 
@@ -34,6 +44,18 @@ class Bus(db.Model):
     # Relationships
     driver = db.relationship('User', back_populates='buses')
     schedules = db.relationship('Schedule', back_populates='bus')
+
+    def to_dict(self):
+        return {
+            'bus_id': self.bus_id,
+            'driver_id': self.driver_id,
+            'number_of_seats': self.number_of_seats,
+            'cost_per_seat': self.cost_per_seat,
+            'route': self.route,
+            'status': self.status,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
 
     def __repr__(self):
         return f'<Bus(driver_id={self.driver_id}, route={self.route}, status={self.status})>'
@@ -53,6 +75,18 @@ class Schedule(db.Model):
     bus = db.relationship('Bus', back_populates='schedules')
     bookings = db.relationship('Booking', back_populates='schedule')
 
+    def to_dict(self):
+        return {
+            'schedule_id': self.schedule_id,
+            'bus_id': self.bus_id,
+            'departure_time': self.departure_time,
+            'arrival_time': self.arrival_time,
+            'date': self.date,
+            'status': self.status,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
+
     def __repr__(self):
         return f'<Schedule(bus_id={self.bus_id}, date={self.date}, status={self.status})>'
 
@@ -71,6 +105,18 @@ class Booking(db.Model):
     customer = db.relationship('User', back_populates='bookings')
     schedule = db.relationship('Schedule', back_populates='bookings')
 
+    def to_dict(self):
+        return {
+            'booking_id': self.booking_id,
+            'customer_id': self.customer_id,
+            'schedule_id': self.schedule_id,
+            'number_of_seats_booked': self.number_of_seats_booked,
+            'total_price': self.total_price,
+            'booking_status': self.booking_status,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
+
     def __repr__(self):
         return f'<Booking(customer_id={self.customer_id}, schedule_id={self.schedule_id}, status={self.booking_status})>'
 
@@ -86,6 +132,17 @@ class Payment(db.Model):
 
     # Relationships
     booking = db.relationship('Booking')
+
+    def to_dict(self):
+        return {
+            'payment_id': self.payment_id,
+            'booking_id': self.booking_id,
+            'payment_amount': self.payment_amount,
+            'payment_date': self.payment_date,
+            'payment_status': self.payment_status,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
 
     def __repr__(self):
         return f'<Payment(booking_id={self.booking_id}, amount={self.payment_amount}, status={self.payment_status})>'
