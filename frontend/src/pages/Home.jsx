@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
+
 import Footer from '../components/Footer';
 import Header from '../components/Navbar';
-
-// Bus images
+import Theme from '../components/theme/Theme'; // Corrected path
 import bus1 from '../assets/bus1.png';
 import bus2 from '../assets/bus2.png';
 import bus3 from '../assets/bus3.png';
@@ -17,31 +17,29 @@ import bus9 from '../assets/bus9.png';
 import bus10 from '../assets/bus10.png';
 
 const busData = [
-  { name: 'Safari Explorer', image: bus1, description: 'Comfortable and spacious for long journeys.' },
-  { name: 'Mountain Climber', image: bus2, description: 'Perfect for high altitude travel.' },
-  { name: 'City Hopper', image: bus3, description: 'Ideal for quick city trips.' },
-  { name: 'Desert Cruiser', image: bus4, description: 'Best for desert expeditions.' },
-  { name: 'Coastal Voyager', image: bus5, description: 'Enjoy the coastal breeze on this bus.' },
-  { name: 'Forest Ranger', image: bus6, description: 'Great for forest adventures.' },
-  { name: 'Urban Explorer', image: bus7, description: 'Navigate the city with ease.' },
-  { name: 'Island Hopper', image: bus8, description: 'Perfect for island tours.' },
-  { name: 'Beach Cruiser', image: bus9, description: 'Comfortable rides along the coast.' },
-  { name: 'Countryside Traveller', image: bus10, description: 'Explore the countryside in comfort.' },
+  { name: 'Safari Explorer', image: bus1, category: 'Adventure', seats: 40 },
+  { name: 'Mountain Climber', image: bus2, category: 'Mountain Travel', seats: 30 },
+  { name: 'City Hopper', image: bus3, category: 'City Trips', seats: 50 },
+  { name: 'Desert Cruiser', image: bus4, category: 'Desert Tours', seats: 35 },
+  { name: 'Coastal Voyager', image: bus5, category: 'Coastal Travel', seats: 45 },
+  { name: 'Forest Ranger', image: bus6, category: 'Forest Exploration', seats: 40 },
+  { name: 'Urban Explorer', image: bus7, category: 'City Tours', seats: 55 },
+  { name: 'Island Hopper', image: bus8, category: 'Island Trips', seats: 30 },
+  { name: 'Beach Cruiser', image: bus9, category: 'Beach Tours', seats: 50 },
+  { name: 'Countryside Traveller', image: bus10, category: 'Countryside', seats: 40 },
 ];
 
 function Home() {
-  const [currentBusIndex, setCurrentBusIndex] = useState(0);
+  const [searchCategory, setSearchCategory] = useState('');
+  const [showAll, setShowAll] = useState(false);
 
-  const nextBus = () => {
-    setCurrentBusIndex((prevIndex) => (prevIndex + 1) % busData.length);
-  };
-
-  const prevBus = () => {
-    setCurrentBusIndex((prevIndex) => (prevIndex - 1 + busData.length) % busData.length);
-  };
+  const filteredBuses = busData.filter(bus => 
+    bus.name.toLowerCase().includes(searchCategory.toLowerCase())
+  );
 
   return (
     <div className="home">
+      <Theme /> {/* Theme toggle button */}
       <Header />
       <div className="home-header">
         <div className="text-content">
@@ -53,21 +51,31 @@ function Home() {
 
       <div className="category">
         <h2>Our Bus Fleet</h2>
-        <div className="bus-slider" style={{ transform: `translateX(-${currentBusIndex * 350}px)` }}>
-          {busData.map((bus, index) => (
+        <div className="category-filter">
+          <input 
+            type="text" 
+            placeholder="Search by category..." 
+            value={searchCategory} 
+            onChange={(e) => setSearchCategory(e.target.value)} 
+          />
+        </div>
+        
+        <div className="bus-list">
+          {filteredBuses.slice(0, showAll ? filteredBuses.length : 3).map((bus, index) => (
             <div key={index} className="bus-card">
               <img src={bus.image} alt={bus.name} />
-              <div className="bus-description">
-                <h3>{bus.name}</h3>
-                <p>{bus.description}</p>
+              <div className="bus-overlay">
+                <div className="bus-info">
+                  <h3>{bus.category}</h3>
+                  <p>{bus.seats} Seats</p>
+                </div>
               </div>
             </div>
           ))}
         </div>
-
-        {/* Arrow buttons to change bus */}
-        <button className="arrow-btn arrow-btn-left" onClick={prevBus}>❮</button>
-        <button className="arrow-btn arrow-btn-right" onClick={nextBus}>❯</button>
+        <button onClick={() => setShowAll(!showAll)} className="view-all">
+          {showAll ? 'Show Less' : 'View All'}
+        </button>
       </div>
 
       <div className="features">

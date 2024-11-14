@@ -1,62 +1,75 @@
-/* Home.css */
-.home {
+/* Base styles for light mode */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --light-bg: #f0f0f0;
+    --dark-text: #333;
+    --text-light: rgba(255, 255, 255, 0.85);
+  }
+  
+  /* Dark mode overrides */
+  .dark {
+    --primary-color: #1abc9c;
+    --secondary-color: #e74c3c;
+    --light-bg: #121212;
+    --dark-text: #ecf0f1;
+    --text-light: rgba(255, 255, 255, 0.85);
+  }
+  
+  /* Home Page Base Styles */
+  .home {
     color: var(--dark-text);
     background-color: var(--light-bg);
     overflow-x: hidden;
-}
-
-.home-header {
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Home Header */
+  .home-header {
     position: relative;
     width: 100%;
-    height: 100vh; /* Enlarge the header */
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 3rem;
-    background-image: url('../assets/bg1.jpg'); /* Retain background image */
+    background-image: url('../assets/bg1.jpg');
     background-size: cover;
     background-position: center;
     color: var(--primary-color);
     overflow: hidden;
-}
-
-.home-header::before {
+  }
+  
+  .home-header::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4); /* Dark overlay for text visibility */
+    background: rgba(0, 0, 0, 0.4);
     z-index: 1;
-}
-
-.text-content, 
-.bus-slider {
-    position: relative;
-    z-index: 2;
-}
-
-.text-content {
+  }
+  
+  .text-content {
     width: 50%;
-    color: rgba(255, 255, 255, 0.85); /* Translucent text */
-}
-
-.text-content h1 {
-    font-size: 4rem; /* Larger font size */
+    color: var(--text-light);
+  }
+  
+  .text-content h1 {
+    font-size: 4rem;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Text shadow for contrast */
-}
-
-.text-content p {
-    font-size: 1.5rem; /* Increased paragraph font size */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .text-content p {
+    font-size: 1.5rem;
     margin-bottom: 1.5rem;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-}
-
-/* Stylish button styling */
-.book-button {
-    padding: 1rem 2rem; /* Larger button */
+  }
+  
+  .book-button {
+    padding: 1rem 2rem;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: #fff;
     text-decoration: none;
@@ -65,142 +78,138 @@
     font-weight: bold;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.book-button:hover {
+  }
+  
+  .book-button:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Bus Slider */
-.bus-slider {
-    display: flex;
-    width: 100%;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    gap: 2rem;
-    padding: 2rem 0;
-}
-
-.bus-card {
-    position: relative;
-    background: rgba(255, 255, 255, 0.9); /* Less transparency for better visibility */
-    border-radius: 15px;
-    width: 350px; /* Enlarged card width */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    perspective: 1000px; /* Enable 3D effects */
-}
-
-.bus-card:hover {
-    transform: scale(1.05); /* Hover effect */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    animation: rotate-card 0.6s ease forwards; /* Animation on hover */
-}
-
-.bus-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 15px 15px 0 0; /* Rounded top edges */
-}
-
-.bus-card .bus-description {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.7); /* Dark background for better text visibility */
-    color: white;
+  }
+  
+  /* Category Section */
+  .category {
+    padding: 4rem 2rem;
     text-align: center;
+    background-color: var(--light-bg);
+    margin-bottom: 3rem;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .category h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Search Input Styling */
+  .category-filter input {
+    padding: 10px 20px;
     font-size: 1rem;
-}
-
-/* Keyframe for card rotation */
-@keyframes rotate-card {
-    from {
-        transform: rotateY(-10deg);
-        opacity: 0.8;
-    }
-    to {
-        transform: rotateY(0deg);
-        opacity: 1;
-    }
-}
-
-/* Arrow buttons to change bus */
-.arrow-btn {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    width: 60%;
+  }
+  
+  .category-filter .search-icon {
     position: absolute;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+  }
+  
+  /* Bus List Styling */
+  .bus-list {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .bus-card {
+    width: 350px;
+    height: 300px;
+    background: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .bus-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .bus-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .bus-card:hover .bus-overlay {
+    opacity: 1;
+  }
+  
+  .bus-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .bus-info h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin: 0.5rem 0;
+  }
+  
+  .bus-info p {
+    font-size: 1.2rem;
+    color: #fff;
+  }
+  
+  .view-all {
+    padding: 0.5rem 2rem;
+    font-size: 1.2rem;
+    background-color: var(--primary-color);
     color: white;
     border: none;
-    padding: 1rem;
+    border-radius: 20px;
     cursor: pointer;
-    z-index: 3;
-}
-
-.arrow-btn-left {
-    left: 10px;
-}
-
-.arrow-btn-right {
-    right: 10px;
-}
-
-/* Features and Routes section styling */
-.features, .routes {
+  }
+  
+  .view-all:hover {
+    background-color: var(--secondary-color);
+  }
+  
+  /* Features Section */
+  .features {
     text-align: center;
-    padding: 2rem;
     background-color: var(--light-bg);
-}
-
-.features h2, .routes h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-}
-
-.features ul, .routes ul {
+    padding: 3rem 2rem;
+  }
+  
+  .features h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .features ul {
     list-style: none;
     padding: 0;
-}
-
-.features ul li, .routes ul li {
     font-size: 1.2rem;
-    margin: 0.5rem 0;
-    color: var(--dark-text);
-}
-
-/* Dark theme support */
-.dark .home-header {
-    color: #f1f1f1;
-}
-
-.dark .text-content, .dark .features, .dark .routes {
-    color: #f1f1f1;
-    background-color: #121212;
-}
-
-.dark .text-content h1,
-.dark .text-content p {
-    background-color: transparent;
-    color: #f1f1f1;
-}
-
-.dark .book-button {
-    background-color: var(--secondary-color);
-}
-
-.dark .book-button:hover {
-    background-color: var(--primary-color);
-}
-
-.dark .bus-card {
-    background: rgba(0, 0, 0, 0.6); /* Darker background in dark theme */
-}
-
-.dark .bus-card .bus-description {
-    background: rgba(0, 0, 0, 0.8); /* Darker description background */
-}
+  }
+  
+  .features li {
+    margin: 1rem 0;
+  }
+  

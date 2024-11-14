@@ -1,20 +1,23 @@
-import { Outlet } from "react-router-dom";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 import Footer from './components/Footer';
-import Navbar from "./components/Navbar";
+import Navbar from './components/Navbar';
+import Theme from './components/theme/Theme'; // Import the Theme component
 
 function App() {
   return (
     <div>
-      <navbar>
+      <Theme /> {/* Theme toggle button */}
+      <nav>
         <Navbar />
-      </navbar>
+      </nav>
 
       <main>
         <Outlet />
       </main>
 
-    <Footer />
-   </div>
+      <Footer />
+    </div>
   );
 }
 
