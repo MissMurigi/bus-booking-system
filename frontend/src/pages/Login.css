@@ -1,12 +1,10 @@
-
-/* General reset for margin, padding, and box-sizing */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Layout for the login page */
+
 body, html {
   height: 100%;
   font-family: 'Arial', sans-serif;
@@ -14,7 +12,7 @@ body, html {
   color: #333;
 }
 
-/* Container for the login page */
+
 .login {
   display: flex;
   justify-content: center;
@@ -66,7 +64,7 @@ input:focus {
   background-color: #fff;
 }
 
-/* Button styling */
+
 .login-button {
   width: 100%;
   padding: 12px;
@@ -83,7 +81,7 @@ input:focus {
   background-color: #1a6ac1;
 }
 
-/* Sign-up link */
+
 .signup-link {
   text-align: center;
   margin-top: 15px;
@@ -102,7 +100,7 @@ input:focus {
   text-decoration: underline;
 }
 
-/* Responsive design */
+
 @media (max-width: 768px) {
   .login-container {
     padding: 20px;

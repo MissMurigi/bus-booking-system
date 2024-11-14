@@ -1,4 +1,4 @@
-/* Base styles for light mode */
+
 :root {
     --primary-color: #3498db;
     --secondary-color: #2ecc71;
@@ -7,7 +7,7 @@
     --text-light: rgba(255, 255, 255, 0.85);
   }
   
-  /* Dark mode overrides */
+ 
   .dark {
     --primary-color: #1abc9c;
     --secondary-color: #e74c3c;
@@ -16,7 +16,7 @@
     --text-light: rgba(255, 255, 255, 0.85);
   }
   
-  /* Home Page Base Styles */
+ 
   .home {
     color: var(--dark-text);
     background-color: var(--light-bg);
@@ -24,7 +24,7 @@
     transition: background-color 0.3s, color 0.3s;
   }
   
-  /* Home Header */
+
   .home-header {
     position: relative;
     width: 100%;
@@ -85,7 +85,7 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   }
   
-  /* Category Section */
+ 
   .category {
     padding: 4rem 2rem;
     text-align: center;
@@ -99,7 +99,7 @@
     margin-bottom: 2rem;
   }
   
-  /* Search Input Styling */
+  
   .category-filter input {
     padding: 10px 20px;
     font-size: 1rem;
@@ -116,8 +116,7 @@
     transform: translateY(-50%);
     pointer-events: none;
   }
-  
-  /* Bus List Styling */
+
   .bus-list {
     display: flex;
     justify-content: space-around;
@@ -191,7 +190,7 @@
     background-color: var(--secondary-color);
   }
   
-  /* Features Section */
+
   .features {
     text-align: center;
     background-color: var(--light-bg);
