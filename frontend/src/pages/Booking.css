@@ -1,0 +1,123 @@
+.booking-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #111;
+    color: #fff;
+    padding: 20px;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  
+  .bus-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .bus-image {
+    width: 250px;
+    margin-right: 20px;
+  }
+  
+  .bus-details h3 {
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+  
+  .number-plate, .rating, .description {
+    font-size: 1em;
+    margin: 5px 0;
+  }
+  
+  .destination-info {
+    background-color: #222;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: left;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+  }
+  
+  .destination-info p {
+    margin: 5px 0;
+    font-size: 1em;
+  }
+  
+  .seats-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+    max-width: 600px;
+  }
+  
+  .seat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    border-radius: 6px;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .available {
+    background-color: #444;
+    color: white;
+  }
+  
+  .available:hover {
+    background-color: #666;
+  }
+  
+  .booked {
+    background-color: #dc3545; /* Red for booked seats */
+    color: white;
+    cursor: not-allowed;
+  }
+  
+  .selected {
+    background-color: #6c63ff; /* Purple for selected seats */
+    color: white;
+  }
+  
+  .reserved {
+    background-color: #333; /* Dark color for driver seat */
+    color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .selected-info {
+    background-color: #222;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .selected-info p {
+    font-size: 1.1em;
+  }
+  
+  .confirm-button {
+    padding: 12px 20px;
+    background-color: #6c63ff;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirm-button:hover {
+    background-color: #574bbd;
+  }
+  

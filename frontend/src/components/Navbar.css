@@ -48,12 +48,12 @@
   }
   
   .navbar .nav-links a:hover {
-    color: #4e76e0;
+    color: #FFA500;
   }
   
   /* Theme Button */
   .navbar .theme-btn {
-    background-color: #4e76e0;
+    background-color: #FFA500;
     padding: 0.8rem;
     border-radius: 50%;
     cursor: pointer;
@@ -61,7 +61,7 @@
   }
   
   .navbar .theme-btn:hover {
-    background-color: #3a65b3;
+    background-color: #FFA500;
   }
   
   /* Mobile View */

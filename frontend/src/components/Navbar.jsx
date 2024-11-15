@@ -72,7 +72,7 @@ const Navbar = () => {
         </ul>
 
         {/* Help Section */}
-        <div className="relative bg-violet-600 rounded-md px-8 py-2 w-fit cursor-pointer flex items-center gap-x-4">
+        <div className="relative bg-[#FFA500] rounded-md px-8 py-2 w-fit cursor-pointer flex items-center gap-x-4">
           <FaPhone className="text-neutral-50 text-sm" />
           <div>
             <p className="text-xs text-neutral-200 font-light">Need Help?</p>
