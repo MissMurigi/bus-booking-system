@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, request, jsonify, abort
-from models import User, Bus, Route, Booking, Schedule  # Adjust imports based on your models
-from app import db  # Ensure db is correctly imported
+from models import User, Bus, Route, Booking, Schedule,db # Adjust imports based on your models
+  # Ensure db is correctly imported
 
 # Initialize the Flask app
 app = Flask(__name__)

@@ -1,35 +1,41 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from routes import *
+from flask_restful import Api,Resource
+from resources import UserResource, BusResource,ScheduleResource,BookingResource,PaymentResource # Import resources from resources.py
+from models import db
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 
 # Initialize the Flask application
 app = Flask(__name__)
 
 # Configure the database URI
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Initialize the SQLAlchemy object
-db = SQLAlchemy(app)
+api = Api(app)
 
 # Initialize Flask-Migrate
 migrate = Migrate(app, db)
 
-# Example model
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+# Initialize app
+db.init_app(app)
 
-# Create the database tables
-with app.app_context():
-    db.create_all()
+#Index url
+class Index(Resource):
+    def get(self):
+        return {"message":"Welcome to Our Bus Booking System"}
 
-# Define a route
-@app.route('/')
-def home():
-    return "Hello, travellers!"
+# Register API resources
+api.add_resource(Index,'/')
+api.add_resource(UserResource, '/users', '/users/<int:user_id>')
+api.add_resource(BusResource, '/buses', '/buses/<int:bus_id>')
+api.add_resource(ScheduleResource, '/schedule', '/schedue/<int:schedule_id>')
+api.add_resource(BookingResource, '/booking', '/booking/<int:booking_id>')
+api.add_resource(PaymentResource, '/payment', '/payment/<int:payment_id>')
 
 # Run the app
 if __name__ == '__main__':
