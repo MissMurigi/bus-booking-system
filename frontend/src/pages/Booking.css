@@ -1,77 +1,123 @@
-/* Booking.css */
-
 .booking-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background-color: #1f4a5c; /* Dark teal background */
-    color: white;
+    background-color: #111;
+    color: #fff;
     padding: 20px;
     min-height: 100vh;
+    font-family: Arial, sans-serif;
   }
   
-  .booking-container h2 {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #ffbf00; /* Yellow accent for title */
+  .bus-info {
+    display: flex;
+    align-items: center;
     margin-bottom: 20px;
+  }
+  
+  .bus-image {
+    width: 250px;
+    margin-right: 20px;
+  }
+  
+  .bus-details h3 {
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+  
+  .number-plate, .rating, .description {
+    font-size: 1em;
+    margin: 5px 0;
+  }
+  
+  .destination-info {
+    background-color: #222;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: left;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+  }
+  
+  .destination-info p {
+    margin: 5px 0;
+    font-size: 1em;
   }
   
   .seats-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Adjust columns to match seat arrangement */
+    grid-template-columns: repeat(8, 1fr);
     gap: 10px;
-    max-width: 500px;
     margin: 20px 0;
+    max-width: 600px;
   }
   
   .seat {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1em;
-    font-weight: bold;
     width: 100%;
     height: 50px;
-    border-radius: 8px;
+    border-radius: 6px;
+    font-size: 1.5em;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
   .available {
-    background-color: #28a745; /* Green for available seats */
+    background-color: #444;
     color: white;
   }
   
   .available:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #666;
   }
   
-  .reserved {
-    background-color: #dc3545; /* Red for reserved seats */
+  .booked {
+    background-color: #dc3545; /* Red for booked seats */
+    color: white;
+    cursor: not-allowed;
+  }
+  
+  .selected {
+    background-color: #6c63ff; /* Purple for selected seats */
     color: white;
   }
   
-  .reserved:hover {
-    background-color: #c82333; /* Darker red on hover */
+  .reserved {
+    background-color: #333; /* Dark color for driver seat */
+    color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .selected-info {
+    background-color: #222;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .selected-info p {
+    font-size: 1.1em;
   }
   
   .confirm-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #ffbf00; /* Yellow for confirm button */
-    color: #1f4a5c;
+    padding: 12px 20px;
+    background-color: #6c63ff;
+    color: #fff;
     font-size: 1.1em;
     font-weight: bold;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    margin-top: 20px;
     transition: background-color 0.3s ease;
   }
   
   .confirm-button:hover {
-    background-color: #e0a700; /* Darker yellow on hover */
+    background-color: #574bbd;
   }
   

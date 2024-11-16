@@ -10,6 +10,9 @@ import TermOfService from './pages/TermsOfService';
 import SIgnup from './pages/Signup'
 import PaymentMethod from './pages/PaymentMethod';
 
+
+
+
 const routes = [
     {
         path: '/',
@@ -27,6 +30,7 @@ const routes = [
           { path: "/termsofservice", element: <TermOfService /> },
           { path: "/signup", element: <SIgnup /> },
           { path: "/payment-method", element: <PaymentMethod /> },
+          
 
 
         ]

@@ -2,14 +2,12 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-import Theme from './components/theme/Theme'; // Import the Theme component
+import Theme from './components/theme/Theme';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div>
-      <Theme /> {/* Theme toggle button */}
+      <Theme /> 
       <nav>
         <Navbar />
       </nav>
