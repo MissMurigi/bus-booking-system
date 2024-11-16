@@ -102,6 +102,20 @@ class User(db.Model):
   - flask db upgrade
 
 ## Step 3: Create Routes for CRUD Operations
+### endpoints
+- Bus api
+https://backend-pi-bay-65.vercel.app/buses
+
+- Schedule api
+https://backend-pi-bay-65.vercel.app/schedule
+
+- Booking api
+https://backend-pi-bay-65.vercel.app/booking
+
+- Payment api
+https://backend-pi-bay-65.vercel.app/payment
+- Users api
+https://backend-pi-bay-65.vercel.app/users
 
 Define routes for buses, bookings, and schedules in the routes.py file using Flask Blueprints.
 
