@@ -1,26 +1,9 @@
-import { Link } from "react-router-dom"
-import './Footer.css'; // Import the CSS file
+import React from 'react';
 
-
-
-
-const Footer = () =>{
-    return(
-        <footer className="footer">
-            <div className="container">
-                <p>
-                    &copy; {new Date().getFullYear()} All rights reserved | This website is made with React
-                </p>
-                <div className="footerlinks">
-                    <Link to="/privacypolicy">Private Policy</Link>
-                    <Link to="/termofservice"> Term of Service</Link>
-                    <Link to='/contactus'>Contact Us</Link>
-
-                </div>
-            </div>
-
-        </footer>
-    )
-}
+const Footer = () => (
+    <footer style={{ textAlign: 'center', padding: '1rem', background: '#f8f8f8' }}>
+        <p>&copy; 2024 Bus Booking System. All rights reserved.</p>
+    </footer>
+);
 
 export default Footer;

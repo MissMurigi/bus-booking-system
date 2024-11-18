@@ -1,7 +1,22 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+    plugins: [react()], // Enables React plugin for JSX support
+    server: {
+        hmr: {
+            overlay: false, // Suppress error overlay in development
+        },
+        port: 5173, // Set a custom port
+        open: true, // Automatically open the app in the browser
+    },
+    resolve: {
+        alias: {
+            '@': '/src', // Simplifies imports with '@/path/to/file'
+        },
+    },
+    build: {
+        outDir: 'dist', // Build output directory
+        sourcemap: true, // Include source maps for debugging
+    },
+});
