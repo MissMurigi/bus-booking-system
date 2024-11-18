@@ -9,6 +9,9 @@ import ContactUs from './pages/ContactUs';
 import TermOfService from './pages/TermsOfService';
 import SIgnup from './pages/Signup'
 import PaymentMethod from './pages/PaymentMethod';
+import AdminDashboard from './pages/AdminDashboard';
+import CustomerDashboard from './pages/CustomerDashboard';
+import DriverDashboard from './pages/DriverDashboard';
 
 
 
@@ -30,6 +33,10 @@ const routes = [
           { path: "/termsofservice", element: <TermOfService /> },
           { path: "/signup", element: <SIgnup /> },
           { path: "/payment-method", element: <PaymentMethod /> },
+          { path: "/admindashboard", element: <AdminDashboard />  },
+          { path: "/customerdashboard", element: <CustomerDashboard /> },
+          { path: "/driverdashboard", element: <DriverDashboard />  }
+          
           
 
 

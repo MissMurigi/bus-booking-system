@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
-
 import Footer from '../components/Footer';
 import Header from '../components/Navbar';
 import Theme from '../components/theme/Theme';
 import bus3 from '../assets/bus3.png';
-import bus1 from '../assets/bus1.png';  // Import image
-import bus2 from '../assets/bus2.png';  // Import image
-import bg1 from '../assets/bg1.jpg';
+import bus1 from '../assets/bus1.png';
+import bus2 from '../assets/bus2.png';
 
 const busData = [
   { name: 'Safari Explorer', image: bus1, category: 'Adventure', seats: 40 },
