@@ -1,21 +1,14 @@
 from flask import Flask, Blueprint, request, jsonify, abort
 from models import User, Bus, Route, Booking, Schedule,db # Adjust imports based on your models
-  # Ensure db is correctly imported
-
-# Initialize the Flask app
+  
+# Initialize app
 app = Flask(__name__)
 
-# Create Blueprint for API routes
 api = Blueprint('api', __name__)
 
-# === Route Helper Functions ===
-
-# Validate route data for creating and updating routes
 def validate_route_data(data):
     if 'start_location' not in data or 'end_location' not in data or 'distance' not in data:
         abort(400, description="Invalid data: 'start_location', 'end_location', and 'distance' are required.")
-
-# === Route Routes ===
 
 # Get all routes
 @api.route('/api/routes', methods=['GET'])

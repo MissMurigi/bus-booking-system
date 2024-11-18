@@ -33,7 +33,7 @@ class Index(Resource):
 api.add_resource(Index,'/')
 api.add_resource(UserResource, '/users', '/users/<int:user_id>')
 api.add_resource(BusResource, '/buses', '/buses/<int:bus_id>')
-api.add_resource(ScheduleResource, '/schedule', '/schedue/<int:schedule_id>')
+api.add_resource(ScheduleResource, '/schedule', '/schedule/<int:schedule_id>')
 api.add_resource(BookingResource, '/booking', '/booking/<int:booking_id>')
 api.add_resource(PaymentResource, '/payment', '/payment/<int:payment_id>')
 

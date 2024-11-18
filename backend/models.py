@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sqlalchemy import MetaData, Enum
+from werkzeug.security import generate_password_hash, check_password_hash
 
 metadata = MetaData()
 db = SQLAlchemy(metadata=metadata)
@@ -27,17 +28,30 @@ class User(db.Model):
     bookings = db.relationship('Booking', back_populates='customer', cascade="all, delete-orphan")
     buses = db.relationship('Bus', back_populates='driver', cascade="all, delete-orphan")
 
+    # Methods
+    def set_password(self, password):
+        """Hashes the password for secure storage."""
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        """Verifies a stored password hash against a given password."""
+        return check_password_hash(self.password_hash, password)
+
     def to_dict(self):
+        """Returns a dictionary representation of the user."""
         return {
-            'user_id': self.user_id,
-            'username': self.username,
-            'email': self.email,
-            'role': self.role,
-            'created_at': self.created_at.isoformat() if self.created_at else None,
-            'updated_at': self.updated_at.isoformat() if self.updated_at else None,
-        }
+        'user_id': self.user_id,
+        'username': self.username,
+        'email': self.email,
+       'password': "hidden", # Be cautious about exposing this
+        'role': self.role,
+        'created_at': self.created_at.isoformat() if self.created_at else None,
+        'updated_at': self.updated_at.isoformat() if self.updated_at else None,
+    }
+
 
     def __repr__(self):
+        """Provides a readable representation of the user."""
         return f'<User(username={self.username}, email={self.email}, role={self.role})>'
 
 
@@ -57,17 +71,16 @@ class Bus(db.Model):
     schedules = db.relationship('Schedule', back_populates='bus', cascade="all, delete-orphan")
 
     def to_dict(self):
-     return {
-        'bus_id': self.bus_id,
-        'driver_id': self.driver_id,
-        'number_of_seats': self.number_of_seats,
-        'cost_per_seat': float(self.cost_per_seat) if self.cost_per_seat is not None else None,  # Convert Decimal to float
-        'route': self.route,
-        'status': self.status,
-        'created_at': self.created_at.isoformat() if self.created_at else None,
-        'updated_at': self.updated_at.isoformat() if self.updated_at else None,
-    }
-
+        return {
+            'bus_id': self.bus_id,
+            'driver_id': self.driver_id,
+            'number_of_seats': self.number_of_seats,
+            'cost_per_seat': float(self.cost_per_seat) if self.cost_per_seat is not None else None,  # Convert Decimal to float
+            'route': self.route,
+            'status': self.status,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None,
+        }
 
     def __repr__(self):
         return f'<Bus(driver_id={self.driver_id}, route={self.route}, status={self.status})>'
@@ -161,4 +174,4 @@ class Payment(db.Model):
         }
 
     def __repr__(self):
-        return f'<Payment(booking_id={self.booking_id}, amount={self.payment_amount}, status={self.payment_status})>'
+        return f'<Payment(booking_id={self.booking_id}, amount={self.payment_amount}, status={self.payment_status})>' 

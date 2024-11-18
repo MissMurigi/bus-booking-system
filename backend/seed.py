@@ -1,3 +1,4 @@
+from werkzeug.security import generate_password_hash
 from app import app, db
 from models import User, Bus, Schedule, Booking, Payment
 from datetime import datetime, timedelta
@@ -5,13 +6,13 @@ from datetime import datetime, timedelta
 # Function to seed data into the database
 def seed_data():
     with app.app_context():  # Ensure that the code runs inside the application context
-        # Seed Users
+        # Seed Users with hashed passwords
         users = [
-            User(username='customer1', password_hash='hashedpassword1', email='customer1@example.com', role='customer'),
-            User(username='driver1', password_hash='hashedpassword2', email='driver1@example.com', role='driver'),
-            User(username='admin1', password_hash='hashedpassword3', email='admin1@example.com', role='admin'),
-            User(username='customer2', password_hash='hashedpassword4', email='customer2@example.com', role='customer'),
-            User(username='driver2', password_hash='hashedpassword5', email='driver2@example.com', role='driver'),
+            User(username='customer1', password_hash=generate_password_hash('password1'), email='customer1@example.com', role='customer'),
+            User(username='driver1', password_hash=generate_password_hash('password2'), email='driver1@example.com', role='driver'),
+            User(username='admin1', password_hash=generate_password_hash('password3'), email='admin1@example.com', role='admin'),
+            User(username='customer2', password_hash=generate_password_hash('password4'), email='customer2@example.com', role='customer'),
+            User(username='driver2', password_hash=generate_password_hash('password5'), email='driver2@example.com', role='driver'),
         ]
 
         # Add Users to the session
