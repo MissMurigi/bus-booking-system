@@ -19,7 +19,7 @@ class UserResource(Resource):
         try:
             user = User(
                 username=data['username'],
-                password_hash=data['password_hash'],
+                password_hash=data['password'],
                 email=data['email'],
                 role=data['role']
             )
