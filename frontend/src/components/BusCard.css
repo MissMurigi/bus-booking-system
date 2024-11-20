@@ -1,0 +1,70 @@
+/* General styling for the card */
+.bus-card {
+    width: 100%;
+    max-width: 380px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+  }
+  
+  .bus-card:hover {
+    transform: translateY(-5px); /* Slightly raise the card on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Title Styling */
+  .bus-card-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Image container */
+  .bus-card-image {
+    width: 100%;
+    height: 180px;  /* Control image size */
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 3px solid #f0f0f0;
+  }
+  
+  .bus-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Makes the image cover the area without distortion */
+  }
+  
+  /* Button styling */
+  .view-button {
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    border-radius: 50px;  /* Rounded button */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+  }
+  
+  .view-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);  /* Slightly increase button size on hover */
+  }
+  
+  .view-button:focus {
+    outline: none;
+  }
+  
+  .view-button:active {
+    transform: scale(0.98);  /* Button contracts on click */
+  }
+  

@@ -18,7 +18,7 @@ function BookingForm() {
             type='email'
             value={email}
             required />
-        </div>
+        </div>e
         <div>
           <label>Seats</label>
 

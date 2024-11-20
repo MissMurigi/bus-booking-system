@@ -1,45 +1,88 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
+
 import Footer from '../components/Footer';
+import Header from '../components/Navbar';
+import Theme from '../components/theme/Theme';
+import bus3 from '../assets/bus3.png';
+import bus1 from '../assets/bus1.png';  // Import image
+import bus2 from '../assets/bus2.png';  // Import image
+import bg1 from '../assets/bg1.jpg';
+
+const busData = [
+  { name: 'Safari Explorer', image: bus1, category: 'Adventure', seats: 40 },
+  { name: 'Mountain Climber', image: bus2, category: 'Mountain Travel', seats: 30 },
+  { name: 'City Hopper', image: bus3, category: 'City Trips', seats: 50 },
+  // other bus objects...
+];
 
 function Home() {
+  const [searchCategory, setSearchCategory] = useState('');
+  const [showAll, setShowAll] = useState(false);
+
+  const filteredBuses = busData.filter(bus => 
+    bus.name.toLowerCase().includes(searchCategory.toLowerCase())
+  );
+
   return (
-    <div className='home'>
-      <div className='home-header'>
-        <h1>Welcome to our Bus Booking App</h1>
-        <p>Your convenient way to book bus tickets online!</p>
+    <div className="home">
+      <Theme />
+      <Header />
+
+      {/* Home Header Section */}
+      <div className="home-header">
+        <div className="text-content">
+          <h1>Reserve Your Bus <span>Tickets</span> Now</h1>
+          <p>Find and book your bus tickets with just a few clicks. We offer a wide range of bus routes and schedules to suit your needs.</p>
+          <Link to="/booking" className="book-button">Reserve Seat Now</Link>
+        </div>
+        <img src={bus3} alt="Bus" className="bus-image" />
       </div>
 
-      <div className='features'>
+      {/* Rest of the page content */}
+      <div className="category">
+        <h2>Our Bus Fleet</h2>
+        <div className="category-filter">
+          <input 
+            type="text" 
+            placeholder="Search by category..." 
+            value={searchCategory} 
+            onChange={(e) => setSearchCategory(e.target.value)} 
+          />
+        </div>
+        
+        <div className="bus-list">
+          {filteredBuses.slice(0, showAll ? filteredBuses.length : 3).map((bus, index) => (
+            <div key={index} className="bus-card">
+              <img src={bus.image} alt={bus.name} />
+              <div className="bus-overlay">
+                <div className="bus-info">
+                  <h3>{bus.category}</h3>
+                  <p>{bus.seats} Seats</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button onClick={() => setShowAll(!showAll)} className="view-all">
+          {showAll ? 'Show Less' : 'View All'}
+        </button>
+      </div>
+
+      <div className="features">
         <h2>Why Choose Us?</h2>
         <ul>
           <li>Easy booking process</li>
           <li>Best prices guaranteed</li>
           <li>Secure payment options</li>
           <li>24/7 customer support</li>
-
         </ul>
-      </div>
-      <div className='Routes'>
-        <h2>Popular Routes</h2>
-        <ul>
-          <li>New York to Los Angeles</li>
-          <li>Los Angeles to New York</li>
-          <li>Chicago to Miami</li>
-          <li>Miami to Chicago</li>
-
-        </ul>
-      </div>
-      <div className='start'>
-        <h2>Get Started </h2>
-        <p> Book yout next journey with us today!</p>
-        <Link to="/login" className="login-button">Book Now!</Link>
       </div>
 
       <Footer />
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
