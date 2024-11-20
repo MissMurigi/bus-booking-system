@@ -1,0 +1,77 @@
+/* Booking.css */
+
+.booking-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1f4a5c; /* Dark teal background */
+    color: white;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .booking-container h2 {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #ffbf00; /* Yellow accent for title */
+    margin-bottom: 20px;
+  }
+  
+  .seats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Adjust columns to match seat arrangement */
+    gap: 10px;
+    max-width: 500px;
+    margin: 20px 0;
+  }
+  
+  .seat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    font-weight: bold;
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .available {
+    background-color: #28a745; /* Green for available seats */
+    color: white;
+  }
+  
+  .available:hover {
+    background-color: #218838; /* Darker green on hover */
+  }
+  
+  .reserved {
+    background-color: #dc3545; /* Red for reserved seats */
+    color: white;
+  }
+  
+  .reserved:hover {
+    background-color: #c82333; /* Darker red on hover */
+  }
+  
+  .confirm-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffbf00; /* Yellow for confirm button */
+    color: #1f4a5c;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirm-button:hover {
+    background-color: #e0a700; /* Darker yellow on hover */
+  }
+  

@@ -1,0 +1,86 @@
+/* Home.css */
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1f4a5c; /* Dark teal background */
+    color: white;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .home-header {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .home-header h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .home-header p {
+    font-size: 1.2em;
+  }
+  
+  .features, .Routes, .start {
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #2e5f73; /* Slightly lighter teal */
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+  }
+  
+  .features h2, .Routes h2, .start h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #ffbf00; /* Accent color for headings */
+  }
+  
+  .features ul, .Routes ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 1.1em;
+  }
+  
+  .features li, .Routes li {
+    margin: 10px 0;
+  }
+  
+  .start p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  
+  .login-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffbf00; /* Bright yellow button color */
+    color: #1f4a5c;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-button:hover {
+    background-color: #e0a700; /* Slightly darker yellow for hover effect */
+  }
+  
+  /* Footer styles */
+  footer {
+    margin-top: 30px;
+    width: 100%;
+    padding: 20px;
+    background-color: #2e5f73; /* Slightly lighter teal */
+    color: white;
+    text-align: center;
+  }
+  
