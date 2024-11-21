@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../../config/api'; // Importing the API base URL
 
 const Signup = () => {
     const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ const Signup = () => {
         password: '',
         role: 'customer',
     });
+    const [error, setError] = useState(null); // For error handling
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -17,21 +19,30 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await fetch('https://backend-pi-bay-65.vercel.app/users/signup', {
+            const response = await fetch(`${API_BASE_URL}/users/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
+
+            if (!response.ok) {
+                // Handle server errors
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Signup failed');
+            }
+
             alert('Signup successful! Please log in.');
             navigate('/'); // Redirect to Login page
         } catch (err) {
             console.error('Signup error:', err);
+            setError(err.message); // Set error message for display
         }
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <h2>Signup</h2>
+            {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
             <input
                 type="text"
                 name="name"

@@ -40,15 +40,14 @@ class User(db.Model):
     def to_dict(self):
         """Returns a dictionary representation of the user."""
         return {
-        'user_id': self.user_id,
-        'username': self.username,
-        'email': self.email,
-       'password': "hidden", # Be cautious about exposing this
-        'role': self.role,
-        'created_at': self.created_at.isoformat() if self.created_at else None,
-        'updated_at': self.updated_at.isoformat() if self.updated_at else None,
-    }
-
+            'user_id': self.user_id,
+            'username': self.username,
+            'email': self.email,
+            'password': self.password_hash, 
+            'role': self.role,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None,
+        }
 
     def __repr__(self):
         """Provides a readable representation of the user."""

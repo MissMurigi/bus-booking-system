@@ -1,29 +1,35 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDriverBuses } from '../../redux/slices/busSlice';
+import BusList from '../Bus/BusList';
+import './DriverDashboard.css';
 
 const DriverDashboard = () => {
     const dispatch = useDispatch();
-    const driverId = localStorage.getItem('driverId'); // Assume driver's ID is stored in localStorage
-    const driverBuses = useSelector((state) => state.bus.driverBuses);
+    const { driverBuses, status, error } = useSelector((state) => state.buses);
+    const { user } = useSelector((state) => state.auth);
 
     useEffect(() => {
-        if (driverId) {
-            dispatch(fetchDriverBuses(driverId));
+        if (user && user.id) {
+            dispatch(fetchDriverBuses(user.id));
         }
-    }, [dispatch, driverId]);
+    }, [dispatch, user]);
+
+    if (status === 'loading') {
+        return <div>Loading...</div>;
+    }
+
+    if (status === 'failed') {
+        return <div>Error: {error}</div>;
+    }
 
     return (
-        <div>
-            <h1>Driver Dashboard</h1>
-            <h2>Assigned Buses</h2>
-            <ul>
-                {driverBuses.map((bus) => (
-                    <li key={bus.id}>
-                        {bus.busName} - Route: {bus.route} - Capacity: {bus.capacity}
-                    </li>
-                ))}
-            </ul>
+        <div className="driver-dashboard">
+            <h1 className="dashboard-title">Driver Dashboard</h1>
+            <div className="dashboard-section">
+                <h2>Your Assigned Buses</h2>
+                <BusList buses={driverBuses} />
+            </div>
         </div>
     );
 };

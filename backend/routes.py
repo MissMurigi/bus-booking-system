@@ -1,203 +1,124 @@
 from flask import Flask, Blueprint, request, jsonify, abort
-from models import User, Bus, Route, Booking, Schedule,db # Adjust imports based on your models
-  
+from models import User, Bus, Route, Booking, Schedule, db
+from werkzeug.security import generate_password_hash
+from marshmallow import Schema, fields, ValidationError
+
 # Initialize app
 app = Flask(__name__)
 
-api = Blueprint('api', __name__)
+# Blueprint for users
+users_blueprint = Blueprint('users', __name__)
+# Blueprint for routes
+routes_blueprint = Blueprint('routes', __name__)
+# Blueprint for buses
+buses_blueprint = Blueprint('buses', __name__)
+# Blueprint for schedules
+schedules_blueprint = Blueprint('schedules', __name__)
+# Blueprint for bookings
+bookings_blueprint = Blueprint('bookings', __name__)
 
-def validate_route_data(data):
-    if 'start_location' not in data or 'end_location' not in data or 'distance' not in data:
-        abort(400, description="Invalid data: 'start_location', 'end_location', and 'distance' are required.")
+# === Schema Definitions ===
+class RouteSchema(Schema):
+    start_location = fields.String(required=True)
+    end_location = fields.String(required=True)
+    distance = fields.Float(required=True)
 
-# Get all routes
-@api.route('/api/routes', methods=['GET'])
+route_schema = RouteSchema()
+routes_schema = RouteSchema(many=True)
+
+class UserSchema(Schema):
+    username = fields.String(required=True)
+    email = fields.Email(required=True)
+    password = fields.String(required=True)
+    role = fields.String(required=True)
+
+user_schema = UserSchema()
+
+# === Error Handling ===
+@app.errorhandler(ValidationError)
+def handle_validation_error(e):
+    return jsonify({"errors": e.messages}), 400
+
+@app.errorhandler(404)
+def handle_404(e):
+    return jsonify({"error": str(e)}), 404
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    return jsonify({"error": "An unexpected error occurred.", "message": str(e)}), 500
+
+# === User Routes ===
+@users_blueprint.route('/users', methods=['POST'])
+def create_user():
+    data = request.get_json()
+    user_data = user_schema.load(data)
+    
+    password_hash = generate_password_hash(user_data['password'])
+    new_user = User(
+        username=user_data['username'],
+        email=user_data['email'],
+        password_hash=password_hash,
+        role=user_data['role']
+    )
+    db.session.add(new_user)
+    db.session.commit()
+    return jsonify(new_user.to_dict()), 201
+
+@users_blueprint.route('/users/login', methods=['POST'])
+def login_user():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+    
+    user = User.query.filter_by(email=email).first()
+    if user and user.check_password(password):
+        return jsonify({"message": "Login successful", "user": user.to_dict()}), 200
+    return jsonify({"message": "Invalid email or password"}), 401
+
+# === Route Routes ===
+@routes_blueprint.route('/api/routes', methods=['GET'])
 def get_routes():
     routes = Route.query.all()
-    return jsonify([route.to_dict() for route in routes]), 200
+    return jsonify(routes_schema.dump(routes)), 200
 
-# Create a new route
-@api.route('/api/routes', methods=['POST'])
+@routes_blueprint.route('/api/routes', methods=['POST'])
 def create_route():
     data = request.get_json()
-    validate_route_data(data)
+    route_data = route_schema.load(data)
 
-    new_route = Route(
-        start_location=data['start_location'],
-        end_location=data['end_location'],
-        distance=data['distance']
-    )
+    new_route = Route(**route_data)
     db.session.add(new_route)
     db.session.commit()
     return jsonify(new_route.to_dict()), 201
 
-# Get a specific route by ID
-@api.route('/api/routes/<int:route_id>', methods=['GET'])
-def get_route(route_id):
+@routes_blueprint.route('/api/routes/<int:route_id>', methods=['GET', 'PUT', 'DELETE'])
+def manage_route(route_id):
     route = Route.query.get(route_id)
     if not route:
-        return jsonify({"message": "Route not found"}), 404
-    return jsonify(route.to_dict())
+        abort(404, description="Route not found")
 
-# Update a route by ID
-@api.route('/api/routes/<int:route_id>', methods=['PUT'])
-def update_route(route_id):
-    route = Route.query.get(route_id)
-    if not route:
-        return jsonify({"message": "Route not found"}), 404
+    if request.method == 'GET':
+        return jsonify(route.to_dict())
+    
+    if request.method == 'PUT':
+        data = request.get_json()
+        route_data = route_schema.load(data, partial=True)
+        for key, value in route_data.items():
+            setattr(route, key, value)
+        db.session.commit()
+        return jsonify({"message": "Route updated successfully!"})
+    
+    if request.method == 'DELETE':
+        db.session.delete(route)
+        db.session.commit()
+        return jsonify({"message": "Route deleted successfully!"})
 
-    data = request.get_json()
-    validate_route_data(data)
-    route.start_location = data.get('start_location', route.start_location)
-    route.end_location = data.get('end_location', route.end_location)
-    route.distance = data.get('distance', route.distance)
-    db.session.commit()
-    return jsonify({"message": "Route updated successfully!"})
-
-# Delete a route by ID
-@api.route('/api/routes/<int:route_id>', methods=['DELETE'])
-def delete_route(route_id):
-    route = Route.query.get(route_id)
-    if not route:
-        return jsonify({"message": "Route not found"}), 404
-
-    db.session.delete(route)
-    db.session.commit()
-    return jsonify({"message": "Route deleted successfully!"})
-
-# === Bus Routes ===
-
-@api.route('/api/buses', methods=['POST'])
-def register_bus():
-    data = request.get_json()
-    new_bus = Bus(name=data['name'], route=data['route'])
-    db.session.add(new_bus)
-    db.session.commit()
-    return jsonify({"message": "Bus registered successfully!"}), 201
-
-@api.route('/api/buses', methods=['GET'])
-def get_buses():
-    buses = Bus.query.all()
-    return jsonify([bus.to_dict() for bus in buses])
-
-@api.route('/api/buses/<int:id>', methods=['GET'])
-def get_bus(id):
-    bus = Bus.query.get(id)
-    if not bus:
-        return jsonify({"message": "Bus not found"}), 404
-    return jsonify(bus.to_dict())
-
-@api.route('/api/buses/<int:id>', methods=['PUT'])
-def update_bus(id):
-    bus = Bus.query.get(id)
-    if not bus:
-        return jsonify({"message": "Bus not found"}), 404
-
-    data = request.get_json()
-    bus.name = data.get('name', bus.name)
-    bus.route = data.get('route', bus.route)
-    db.session.commit()
-    return jsonify({"message": "Bus updated successfully!"})
-
-@api.route('/api/buses/<int:id>', methods=['DELETE'])
-def delete_bus(id):
-    bus = Bus.query.get(id)
-    if not bus:
-        return jsonify({"message": "Bus not found"}), 404
-
-    db.session.delete(bus)
-    db.session.commit()
-    return jsonify({"message": "Bus deleted successfully!"})
-
-# === Schedule Routes ===
-
-@api.route('/api/schedules', methods=['POST'])
-def schedule_bus():
-    data = request.get_json()
-    new_schedule = Schedule(bus_id=data['bus_id'], departure_time=data['departure_time'], arrival_time=data['arrival_time'])
-    db.session.add(new_schedule)
-    db.session.commit()
-    return jsonify({"message": "Bus scheduled successfully!"}), 201
-
-@api.route('/api/schedules', methods=['GET'])
-def get_schedules():
-    schedules = Schedule.query.all()
-    return jsonify([schedule.to_dict() for schedule in schedules])
-
-@api.route('/api/schedules/<int:id>', methods=['GET'])
-def get_schedule(id):
-    schedule = Schedule.query.get(id)
-    if not schedule:
-        return jsonify({"message": "Schedule not found"}), 404
-    return jsonify(schedule.to_dict())
-
-@api.route('/api/schedules/<int:id>', methods=['PUT'])
-def update_schedule(id):
-    schedule = Schedule.query.get(id)
-    if not schedule:
-        return jsonify({"message": "Schedule not found"}), 404
-
-    data = request.get_json()
-    schedule.departure_time = data.get('departure_time', schedule.departure_time)
-    schedule.arrival_time = data.get('arrival_time', schedule.arrival_time)
-    db.session.commit()
-    return jsonify({"message": "Schedule updated successfully!"})
-
-@api.route('/api/schedules/<int:id>', methods=['DELETE'])
-def delete_schedule(id):
-    schedule = Schedule.query.get(id)
-    if not schedule:
-        return jsonify({"message": "Schedule not found"}), 404
-
-    db.session.delete(schedule)
-    db.session.commit()
-    return jsonify({"message": "Schedule deleted successfully!"})
-
-# === Booking Routes ===
-
-@api.route('/api/bookings', methods=['POST'])
-def create_booking():
-    data = request.get_json()
-    new_booking = Booking(user_id=data['user_id'], bus_id=data['bus_id'], seats=data['seats'])
-    db.session.add(new_booking)
-    db.session.commit()
-    return jsonify({"message": "Booking created successfully!"}), 201
-
-@api.route('/api/bookings', methods=['GET'])
-def get_bookings():
-    bookings = Booking.query.all()
-    return jsonify([booking.to_dict() for booking in bookings])
-
-@api.route('/api/bookings/<int:id>', methods=['GET'])
-def get_booking(id):
-    booking = Booking.query.get(id)
-    if not booking:
-        return jsonify({"message": "Booking not found"}), 404
-    return jsonify(booking.to_dict())
-
-@api.route('/api/bookings/<int:id>', methods=['PUT'])
-def update_booking(id):
-    booking = Booking.query.get(id)
-    if not booking:
-        return jsonify({"message": "Booking not found"}), 404
-
-    data = request.get_json()
-    booking.seats = data.get('seats', booking.seats)
-    db.session.commit()
-    return jsonify({"message": "Booking updated successfully!"})
-
-@api.route('/api/bookings/<int:id>', methods=['DELETE'])
-def delete_booking(id):
-    booking = Booking.query.get(id)
-    if not booking:
-        return jsonify({"message": "Booking not found"}), 404
-
-    db.session.delete(booking)
-    db.session.commit()
-    return jsonify({"message": "Booking deleted successfully!"})
-
-# Register Blueprint
-app.register_blueprint(api)
+# === Register Blueprints ===
+app.register_blueprint(users_blueprint, url_prefix='/users')
+app.register_blueprint(routes_blueprint, url_prefix='/routes')
+app.register_blueprint(buses_blueprint, url_prefix='/buses')
+app.register_blueprint(schedules_blueprint, url_prefix='/schedules')
+app.register_blueprint(bookings_blueprint, url_prefix='/bookings')
 
 # Run the app
 if __name__ == '__main__':

@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'path'; // Import Node.js path module
 
 export default defineConfig({
     plugins: [react()], // Enables React plugin for JSX support
@@ -12,7 +13,7 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-            '@': '/src', // Simplifies imports with '@/path/to/file'
+            '@': path.resolve(__dirname, './src') // Simplifies imports with '@/path/to/file'
         },
     },
     build: {

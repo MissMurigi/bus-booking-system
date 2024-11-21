@@ -1,0 +1,64 @@
+/* global.css */
+
+/* CSS Variables for Light and Dark Themes */
+:root {
+    --primary-color: #4caf50; /* Light green */
+    --secondary-color: #81c784; /* Lighter green */
+    --text-color: #222;
+    --background-color: #f9f9f9;
+    --button-color: #ffc107; /* Yellow */
+    --font-family: 'Poppins', sans-serif;
+  }
+  
+  [data-theme="dark"] {
+    --primary-color: #1b5e20; /* Dark green */
+    --secondary-color: #388e3c; /* Medium green */
+    --text-color: #f9f9f9;
+    --background-color: #121212;
+    --button-color: #ffd54f; /* Light yellow */
+  }
+  
+  /* Global Styles */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Responsive Design */
+  html {
+    font-size: 16px;
+  }
+  
+  @media (max-width: 768px) {
+    html {
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    html {
+      font-size: 12px;
+    }
+  }
+  
+  /* Button Styling */
+  button {
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  button:hover {
+    background-color: darken(var(--button-color), 10%);
+    transform: scale(1.05);
+  }
+  

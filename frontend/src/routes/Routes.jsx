@@ -7,15 +7,25 @@ import DriverDashboard from '../pages/Dashboard/DriverDashboard';
 import CustomerDashboard from '../pages/Dashboard/CustomerDashboard';
 import BookingForm from '../pages/Booking/BookingForm';
 import PrivateRoute from './PrivateRoute';
+import Home from '../pages/Home/Home';
+
 
 const AppRoutes = () => (
     <Routes>
-        <Route path="/" element={<Login />} />
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard/admin" element={<PrivateRoute component={AdminDashboard} />} />
-        <Route path="/dashboard/driver" element={<PrivateRoute component={DriverDashboard} />} />
-        <Route path="/dashboard/customer" element={<PrivateRoute component={CustomerDashboard} />} />
-        <Route path="/booking" element={<PrivateRoute component={BookingForm} />} />
+
+        {/* Private Routes */}
+        <Route path="/dashboard/admin" element={<AdminDashboard />} />
+        <Route path="/dashboard/driver" element={<DriverDashboard />} />
+        <Route path="/dashboard/customer" element={<CustomerDashboard />} />
+        <Route path="/booking" element={<BookingForm />} />
+        <Route path="/driver-dashboard" element={<DriverDashboard />} />
+        
+        
+        
     </Routes>
 );
 

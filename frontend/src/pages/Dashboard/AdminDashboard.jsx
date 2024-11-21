@@ -8,28 +8,54 @@ import { fetchBookings, deleteBooking } from '../../redux/slices/bookingSlice';
 
 const AdminDashboard = () => {
     const dispatch = useDispatch();
-    const buses = useSelector((state) => state.bus.buses);
-    const bookings = useSelector((state) => state.booking.bookings);
+    const buses = useSelector((state) => state.buses.buses);
+    // const bookings = useSelector((state) => state.bookings.bookings);
+    const busesStatus = useSelector((state) => state.buses.status);
+    // const bookingsStatus = useSelector((state) => state.bookings.status);
 
-    useEffect(() => {
-        dispatch(fetchBuses());
-        dispatch(fetchBookings());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     if (busesStatus === 'idle') {
+    //         dispatch(fetchBuses());
+    //     }
+    //     if (bookingsStatus === 'idle') {
+    //         dispatch(fetchBookings());
+    //     }
+    // }, [dispatch, busesStatus, bookingsStatus]);
+    // 
+   
 
     const handleBusSubmit = (bus) => {
-        if (bus.id) dispatch(updateBus(bus));
-        else dispatch(addBus(bus));
+        if (bus.id) {
+            dispatch(updateBus(bus));
+        } else {
+            dispatch(addBus(bus));
+        }
     };
 
-    const handleBusDelete = (id) => dispatch(deleteBus(id));
-    const handleBookingCancel = (id) => dispatch(deleteBooking(id));
+    const handleBusDelete = (id) => {
+        dispatch(deleteBus(id));
+    };
+
+    const handleBookingCancel = (id) => {
+        dispatch(deleteBooking(id));
+    };
+
+    // if (busesStatus === 'loading' || 'booking' === 'loading') {
+    //     return <div>Loading...</div>;
+    // }
 
     return (
-        <div>
+        <div className="admin-dashboard">
             <h1>Admin Dashboard</h1>
-            <BusForm onSubmit={handleBusSubmit} />
-            <BusList buses={buses} onDelete={handleBusDelete} onEdit={(bus) => {}} />
-            <BookingList bookings={bookings} onCancel={handleBookingCancel} />
+            <div className="dashboard-section">
+                <h2>Manage Buses</h2>
+                <BusForm onSubmit={handleBusSubmit} />
+                <BusList buses={buses} onDelete={handleBusDelete} onEdit={handleBusSubmit} />
+            </div>
+            <div className="dashboard-section">
+                <h2>Manage Bookings</h2>
+                <BookingList bookings={[]} onCancel={handleBookingCancel} />
+            </div>
         </div>
     );
 };
