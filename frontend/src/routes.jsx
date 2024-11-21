@@ -33,9 +33,9 @@ const routes = [
           { path: "/termsofservice", element: <TermOfService /> },
           { path: "/signup", element: <SIgnup /> },
           { path: "/payment-method", element: <PaymentMethod /> },
-          { path: "/admindashboard", element: <AdminDashboard />  },
-          { path: "/customerdashboard", element: <CustomerDashboard /> },
-          { path: "/driverdashboard", element: <DriverDashboard />  }
+          { path: "/admin-dashboard", element: <AdminDashboard />  },
+          { path: "/customer-dashboard", element: <CustomerDashboard /> },
+          { path: "/driver-dashboard", element: <DriverDashboard />  }
           
           
 
