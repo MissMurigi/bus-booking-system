@@ -1,6 +1,6 @@
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Booking from './pages/Booking';
+
 import Dashboard from './pages/Dashboard';
 import BusDetails from './pages/BusDetails';
 import NotFound from './pages/NotFound';
@@ -25,7 +25,7 @@ const routes = [
         children: [
           { path: "/", element: <Home /> },
           { path: "/login", element: <Login /> },
-          { path: "/booking", element: <Booking /> },
+          { path: "/booking", element: <CustomerDashboard/> },
           { path: "/dashboard", element: <Dashboard /> },
           { path: "/busdetails", element: <BusDetails /> },
           { path: "/privacypolicy", element: <PrivacyPolicy /> },

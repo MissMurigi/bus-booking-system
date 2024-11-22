@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import Footer from '../components/Footer';
-import Header from '../components/Navbar';
+import Navbar from '../components/Navbar';
 import Theme from '../components/theme/Theme';
 import bus3 from '../assets/bus3.png';
 import bus1 from '../assets/bus1.png';
@@ -25,15 +25,15 @@ function Home() {
 
   return (
     <div className="home">
-      <Theme />
-      <Header />
+      {/* <Theme /> */}
+      <Navbar />
 
       {/* Home Header Section */}
       <div className="home-header">
         <div className="text-content">
           <h1>Reserve Your Bus <span>Tickets</span> Now</h1>
           <p>Find and book your bus tickets with just a few clicks. We offer a wide range of bus routes and schedules to suit your needs.</p>
-          <Link to="/booking" className="book-button">Reserve Seat Now</Link>
+          <Link to="/login" className="book-button">Reserve Seat Now</Link>
         </div>
         <img src={bus3} alt="Bus" className="bus-image" />
       </div>

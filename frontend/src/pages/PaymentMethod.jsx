@@ -37,7 +37,7 @@ const PaymentMethod = () => {
   };
 
   const notify = () => {
-    toast.success(`Booking confirmed for ${duration} hours at ${location} using ${selectedMethod}.`, {
+    toast.success(`Booking confirmed using ${selectedMethod}.`, {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
