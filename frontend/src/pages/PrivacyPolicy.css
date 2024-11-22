@@ -1,92 +1,85 @@
-/* Container for the Privacy Policy */
+/* Base styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9; /* Light shade of white */
+  color: #333; /* Dark gray for better contrast on white background */
+}
+
 .privacy-policy-container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 40px auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  background-color: #fff; /* Pure white for the container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border-radius: 8px; /* Smooth corners */
 }
 
-/* Title */
-.privacy-policy-container h1 {
+/* Headings */
+h1 {
+  font-size: 2rem;
+  color: #444; /* Medium gray */
+  margin-bottom: 16px;
   text-align: center;
-  font-size: 2.5rem;
-  color: #0044cc;
-  margin-bottom: 20px;
 }
 
-/* Subtitle for section headings */
-.privacy-policy-container h2 {
-  font-size: 1.8rem;
-  color: #222;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  border-bottom: 2px solid #0044cc;
-  padding-bottom: 5px;
+h2 {
+  font-size: 1.5rem;
+  color: #555; /* Slightly darker gray */
+  margin-top: 24px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #eaeaea; /* Light divider */
+  padding-bottom: 4px;
 }
 
-/* Paragraph text */
-.privacy-policy-container p {
+/* Text and paragraphs */
+p {
   font-size: 1rem;
-  color: #555;
-  margin-bottom: 15px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  color: #666; /* Muted gray for body text */
 }
 
-/* Strong text (for dates, headers, etc.) */
-.privacy-policy-container strong {
-  font-weight: bold;
-  color: #000;
-}
-
-/* List for the information sections */
-.privacy-policy-container ul {
-  margin-left: 20px;
+ul {
   list-style-type: disc;
+  padding-left: 20px;
 }
 
-.privacy-policy-container li {
-  margin-bottom: 10px;
+li {
+  margin-bottom: 8px;
+  color: #555;
 }
 
-/* Back to Home link */
+/* Links */
+a {
+  color: #007BFF; /* Subtle blue for links */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+
+/* Back to Home Button */
 .back-to-home {
-  margin-top: 40px;
   text-align: center;
+  margin-top: 30px;
 }
 
 .home-link {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  color: #fff;
-  background-color: #0044cc;
-  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #007BFF;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  padding: 8px 16px;
+  border: 2px solid #007BFF;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
 .home-link:hover {
-  background-color: #002f8f;
-}
-
-/* Media Queries for responsiveness */
-@media (max-width: 768px) {
-  .privacy-policy-container {
-    padding: 15px;
-  }
-
-  .privacy-policy-container h1 {
-    font-size: 2rem;
-  }
-
-  .privacy-policy-container h2 {
-    font-size: 1.5rem;
-  }
-
-  .privacy-policy-container p {
-    font-size: 0.95rem;
-  }
+  background-color: #007BFF;
+  color: #fff;
 }
