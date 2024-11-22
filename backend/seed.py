@@ -1,74 +1,77 @@
 from werkzeug.security import generate_password_hash
-from models import User, Bus, Route, Booking, Schedule  # Import Schedule
-from app import db
+from app import app, db
+from models import User, Bus, Schedule, Booking, Payment
+from datetime import datetime, timedelta
 
-# Sample Users
-users = [
-    User(username='john_doe', email='john@example.com', password=generate_password_hash('password1'), role='customer'),
-    User(username='jane_smith', email='jane@example.com', password=generate_password_hash('password2'), role='customer'),
-    User(username='alice_jones', email='alice@example.com', password=generate_password_hash('password3'), role='customer'),
-    User(username='bob_brown', email='bob@example.com', password=generate_password_hash('password4'), role='customer'),
-]
-
-# Sample Buses
-buses = [
-    Bus(driver_id=1, number_of_seats=50, cost_per_seat=20.00, route='Route 1', status='available'),  # Assuming driver_id is 1
-    Bus(driver_id=1, number_of_seats=40, cost_per_seat=15.00, route='Route 2', status='available'),
-]
-
-# Sample Routes
-routes = [
-    Route(start_location='New York', end_location='Washington', distance=225),
-    Route(start_location='Los Angeles', end_location='San Francisco', distance=380),
-]
-
-# Sample Schedules
-schedules = [
-    Schedule(bus_id=1, departure_time=datetime(2023, 10, 1, 9, 0), arrival_time=datetime(2023, 10, 1, 12, 0), date=date(2023, 10, 1), status='scheduled'),
-    Schedule(bus_id=2, departure_time=datetime(2023, 10, 2, 10, 0), arrival_time=datetime(2023, 10, 2, 13, 0), date=date(2023, 10, 2), status='scheduled'),
-]
-
-# Function to seed the database
-def seed_database():
-    try:
-        # Add users
-        db.session.bulk_save_objects(users)
-        db.session.commit()
-
-        # Add buses
-        db.session.bulk_save_objects(buses)
-        db.session.commit()
-
-        # Add routes
-        db.session.bulk_save_objects(routes)
-        db.session.commit()
-
-        # Add schedules
-        db.session.bulk_save_objects(schedules)
-        db.session.commit()
-
-        # Fetch created IDs for bookings
-        user_ids = [user.user_id for user in users]
-        bus_ids = [bus.bus_id for bus in buses]
-        schedule_ids = [schedule.schedule_id for schedule in schedules]
-
-        # Sample Bookings using the created IDs
-        bookings = [
-            Booking(customer_id=user_ids[0], schedule_id=schedule_ids[0], number_of_seats_booked=2, total_price=40.00, booking_status='confirmed'),
-            Booking(customer_id=user_ids[1], schedule_id=schedule_ids[1], number_of_seats_booked=1, total_price=15.00, booking_status='confirmed'),
-            Booking(customer_id=user_ids[0], schedule_id=schedule_ids[0], number_of_seats_booked=3, total_price=60.00, booking_status='confirmed'),
-            Booking(customer_id=user_ids[2], schedule_id=schedule_ids[0], number_of_seats_booked=4, total_price=80.00, booking_status='confirmed'),
+# Function to seed data into the database
+def seed_data():
+    with app.app_context():  # Ensure that the code runs inside the application context
+        # Seed Users with hashed passwords
+        users = [
+            User(username='customer1', password_hash=generate_password_hash('password1'), email='customer1@example.com', role='customer'),
+            User(username='driver1', password_hash=generate_password_hash('password2'), email='driver1@example.com', role='driver'),
+            User(username='admin1', password_hash=generate_password_hash('password3'), email='admin1@example.com', role='admin'),
+            User(username='customer2', password_hash=generate_password_hash('password4'), email='customer2@example.com', role='customer'),
+            User(username='driver2', password_hash=generate_password_hash('password5'), email='driver2@example.com', role='driver'),
         ]
 
-        # Add bookings
-        db.session.bulk_save_objects(bookings)
+        # Add Users to the session
+        db.session.add_all(users)
         db.session.commit()
 
-        print(" Database seeded successfully!")
+        # Seed Buses (Assuming driver_id references a User with role 'driver')
+        buses = [
+            Bus(driver_id=2, number_of_seats=40, cost_per_seat=100.00, route='Route A', status='available'),
+            Bus(driver_id=5, number_of_seats=50, cost_per_seat=120.00, route='Route B', status='available'),
+            Bus(driver_id=2, number_of_seats=30, cost_per_seat=80.00, route='Route C', status='available'),
+            Bus(driver_id=5, number_of_seats=45, cost_per_seat=110.00, route='Route D', status='available'),
+            Bus(driver_id=2, number_of_seats=60, cost_per_seat=130.00, route='Route E', status='not_available'),
+        ]
 
-    except Exception as e:
-        db.session.rollback()  # Rollback in case of error
-        print(f"An error occurred while seeding the database: {e}")
+        # Add Buses to the session
+        db.session.add_all(buses)
+        db.session.commit()
+
+        # Seed Schedules (Assuming bus_id references an existing Bus)
+        schedules = [
+            Schedule(bus_id=1, departure_time=datetime.utcnow() + timedelta(days=1), arrival_time=datetime.utcnow() + timedelta(days=1, hours=3), date=datetime.utcnow().date(), status='scheduled'),
+            Schedule(bus_id=2, departure_time=datetime.utcnow() + timedelta(days=2), arrival_time=datetime.utcnow() + timedelta(days=2, hours=3), date=datetime.utcnow().date(), status='scheduled'),
+            Schedule(bus_id=3, departure_time=datetime.utcnow() + timedelta(days=3), arrival_time=datetime.utcnow() + timedelta(days=3, hours=3), date=datetime.utcnow().date(), status='scheduled'),
+            Schedule(bus_id=4, departure_time=datetime.utcnow() + timedelta(days=4), arrival_time=datetime.utcnow() + timedelta(days=4, hours=3), date=datetime.utcnow().date(), status='scheduled'),
+            Schedule(bus_id=5, departure_time=datetime.utcnow() + timedelta(days=5), arrival_time=datetime.utcnow() + timedelta(days=5, hours=3), date=datetime.utcnow().date(), status='scheduled'),
+        ]
+
+        # Add Schedules to the session
+        db.session.add_all(schedules)
+        db.session.commit()
+
+        # Seed Bookings (Assuming customer_id references an existing User and schedule_id references an existing Schedule)
+        bookings = [
+            Booking(customer_id=1, schedule_id=1, number_of_seats_booked=2, total_price=200.00, booking_status='confirmed'),
+            Booking(customer_id=4, schedule_id=2, number_of_seats_booked=3, total_price=300.00, booking_status='confirmed'),
+            Booking(customer_id=1, schedule_id=3, number_of_seats_booked=4, total_price=400.00, booking_status='completed'),
+            Booking(customer_id=1, schedule_id=4, number_of_seats_booked=1, total_price=100.00, booking_status='canceled'),
+            Booking(customer_id=4, schedule_id=5, number_of_seats_booked=5, total_price=500.00, booking_status='confirmed'),
+        ]
+
+        # Add Bookings to the session
+        db.session.add_all(bookings)
+        db.session.commit()
+
+        # Seed Payments (Assuming booking_id references an existing Booking)
+        payments = [
+            Payment(booking_id=1, payment_amount=200.00, payment_status='completed'),
+            Payment(booking_id=2, payment_amount=300.00, payment_status='completed'),
+            Payment(booking_id=3, payment_amount=400.00, payment_status='completed'),
+            Payment(booking_id=4, payment_amount=100.00, payment_status='failed'),
+            Payment(booking_id=5, payment_amount=500.00, payment_status='completed'),
+        ]
+
+        # Add Payments to the session
+        db.session.add_all(payments)
+        db.session.commit()
+
+        print("Data seeded successfully!")
 
 if __name__ == '__main__':
-    seed_database()
+    seed_data()
